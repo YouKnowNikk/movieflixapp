@@ -1,0 +1,14 @@
+
+@media (max-width: 768px) {
+  .movie-card {
+    max-width: 10rem;
+  }
+}
+@media (min-width: 769px) {
+  
+  .movie-card {
+    max-width: 20rem; 
+  }
+}
+
+  
