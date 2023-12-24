@@ -1,13 +1,24 @@
+// NavBar.tsx
+
 import React, { useState } from 'react';
 import AppLogo from './Images/download.png';
 import './navbar.css';
 
-function NavBar({ tabSetter }) {
+interface NavBarProps {
+  tabSetter: React.Dispatch<React.SetStateAction<number>>;
+  onSearch: (query: string) => void;
+}
+const NavBar: React.FC<NavBarProps> = ({ tabSetter, onSearch }) =>{
   const [activeTab, setActiveTab] = useState('0');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleTabClick = (tab) => {
+  const handleTabClick = (tab: string) => {
     setActiveTab(tab);
-    tabSetter(+tab)
+    tabSetter(+tab);
+  };
+
+  const handleSearch = () => {
+    onSearch(searchQuery);
   };
 
   return (
@@ -23,11 +34,21 @@ function NavBar({ tabSetter }) {
         <TabButton tab="Drama" active={activeTab === '18'} onClick={() => handleTabClick('18')} />
         <TabButton tab="Sci-fi" active={activeTab === '10765'} onClick={() => handleTabClick('10765')} />
       </div>
+      <div style={{margin:'2% 0'}}>
+        <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search movies" style={{padding:'0.5rem'}} />
+        <button onClick={handleSearch} style={{marginLeft:'5px',padding:'0.5rem',cursor:'pointer'}}>Search</button>
+      </div>
     </div>
   );
 }
 
-function TabButton({ tab, active, onClick }) {
+interface TabButtonProps {
+  tab: string;
+  active: boolean;
+  onClick: () => void;
+}
+
+const TabButton: React.FC<TabButtonProps> = ({ tab, active, onClick }) => {
   return (
     <button
       style={{
@@ -38,7 +59,6 @@ function TabButton({ tab, active, onClick }) {
         borderRadius: '5px',
         cursor: 'pointer',
         margin: '0 1rem',
-       
       }}
       onClick={onClick}
     >

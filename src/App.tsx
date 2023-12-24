@@ -3,7 +3,7 @@ import MovieList from "./MovieList";
 import "./App.css";
 import logoImage from "./Images/download.png";
 
-function App() {
+function App(): JSX.Element {
   const [showImage, setShowImage] = useState(true);
 
   useEffect(() => {
@@ -20,7 +20,10 @@ function App() {
         <div
           className="welcome-image"
           style={{
-            position:'absolute',top:'50%',left:'50%',transform:"translate(-50%, -50%)"
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: "translate(-50%, -50%)"
           }}
         >
           <img src={logoImage} alt="Welcome" />
@@ -30,7 +33,7 @@ function App() {
           <MovieList />
           <footer>
             <p style={{ textAlign: "center" }}>
-              &copy; 2023 Movie List App. All rights reserved.
+              &copy; {new Date().getFullYear()} Movie List App. All rights reserved.
             </p>
           </footer>
         </div>
@@ -40,5 +43,3 @@ function App() {
 }
 
 export default App;
-
-
